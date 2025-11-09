@@ -51,7 +51,7 @@ class ListArray:public List<T>{
             return out;
 		}
         void insert(int pos, T e) override{
-            if(pos<0 || pos>=n){
+            if(pos<0 || pos>n){
 				throw out_of_range("La posicion esta fuera de los limites");
 			}
             if(n==max){
@@ -64,31 +64,23 @@ class ListArray:public List<T>{
             n++;
         }
 		void append(T e) override{
-            if(n==max){
-                resize(max*2);
-            }
-            arr[n]=e;
-            n++;
+            insert(n,e);
         }
 		void prepend(T e) override{
-            if(n==max){
-                resize(max*2);
-            }
-            for(int i=n;i>0;i--){
-                arr[i]=arr[i-1];
-            }
-            arr[0]=e;
-            n++;
+            insert(0,e);
         }
 		T remove(int pos) override{
             if(pos<0 || pos>=n){
 				throw out_of_range("La posicion esta fuera de los limites");
 			}
             T e = arr[pos];
-            for(int i=pos;i<n;i++){
+            for(int i=pos;i<n-1;i++){
                 arr[i]=arr[i+1];
             }
             n--;
+			if (max > MINSIZE && n < max / 4) { 
+				resize(max / 2);
+			}
             return e;
 
         }
