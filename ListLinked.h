@@ -27,9 +27,9 @@ class ListLinked: public List<T>{
             if(pos<0 || pos>n){
                 throw out_of_range("La posicion esta fuera de los limites");
             }
+			Node<T>* aux=first;
             for(int i=0;i<pos;i++){
-                Node<T>* aux=first->next;
-                first->next=aux->next;
+                aux=aux->next;
             }
             return first->data;
         }
@@ -81,7 +81,8 @@ class ListLinked: public List<T>{
                 nodeToDelete = first;
                 first = first->next;
                 removedData = nodeToDelete->data;
-            } else {
+            } 
+			else {
                 Node<T>* aux = first;
                 for(int i = 0; i < pos - 1; i++){
                     aux = aux->next;
