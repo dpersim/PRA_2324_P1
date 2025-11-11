@@ -31,7 +31,7 @@ class ListLinked: public List<T>{
             for(int i=0;i<pos;i++){
                 aux=aux->next;
             }
-            return first->data;
+            return aux->data;
         }
         friend ostream& operator<<(ostream &out, const ListLinked<T> &list){
             Node<T>* aux=list.first;
